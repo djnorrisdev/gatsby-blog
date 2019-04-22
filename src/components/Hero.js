@@ -5,6 +5,8 @@ import styled from 'styled-components'
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
+  margin: 2em auto;
+  width: 1000px;
 `
 const BgImg = styled(Img)`
   position: absolute;

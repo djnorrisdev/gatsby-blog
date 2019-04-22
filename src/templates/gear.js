@@ -10,6 +10,7 @@ import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import styled from 'styled-components'
 
+
 const FeaturedTitle = styled.h1`
   font-size: 1.6em;
   margin-bottom: 1em;
@@ -21,10 +22,10 @@ const RecentPosts = styled.h1`
   width: 100%;
 `
 
-const Index = ({ data, pageContext }) => {
+const Gear = ({ data, pageContext }) => {
   
   const posts = data.allContentfulPost.edges
-  console.log(posts)
+  const postCount = data.allContentfulPost.totalCount
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
@@ -62,7 +63,9 @@ const Index = ({ data, pageContext }) => {
           ))}
         </CardList> */}
       </Container>
-      <Pagination context={pageContext} />
+      {
+        postCount > 7 ? <Pagination context={pageContext} /> : null
+      }
     </Layout>
   )
 }
@@ -70,10 +73,12 @@ const Index = ({ data, pageContext }) => {
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
     allContentfulPost(
+      filter: {tags: {elemMatch: {title: {eq: "Gear"}}}}
       sort: { fields: [publishDate], order: DESC }
       limit: $limit
       skip: $skip
     ) {
+      totalCount
       edges {
         node {
           title
@@ -98,14 +103,7 @@ export const query = graphql`
         }
       }
     }
-    imageOne: file(relativePath: {eq: "close-up-code.jpg"}) {
-    childImageSharp {
-      fluid(maxWidth: 1100) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
   }
 `
 
-export default Index
+export default Gear

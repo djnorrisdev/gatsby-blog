@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 const Wrapper = styled.footer`
@@ -45,33 +46,21 @@ const Footer = () => (
   <Wrapper>
     <List>
       <Item>
-        <a
-          href="https://www.contentful.com/"
-          rel="nofollow noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            src="https://images.ctfassets.net/fo9twyrwpveg/44baP9Gtm8qE2Umm8CQwQk/c43325463d1cb5db2ef97fca0788ea55/PoweredByContentful_LightBackground.svg"
-            style={{ width: '100px' }}
-            alt="Powered by Contentful"
-          />
-        </a>
+        <Link to='/contact/'>
+          Contact Me
+        </Link>
       </Item>
       <Item>
-        <a
-          href="https://github.com/ryanwiemer/gatsby-starter-gcn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          gatsby-starter-gcn
-        </a>{' '}
+        <span>
+          codegainz
+        </span>{' '}
         by{' '}
         <a
-          href="https://github.com/ryanwiemer"
+          href="https://www.instagram.com/djnorrisdev/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          @ryanwiemer
+          @djnorrisdev
         </a>
       </Item>
     </List>

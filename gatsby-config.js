@@ -40,6 +40,15 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+        name: 'images',
+      },
+    },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
@@ -50,9 +59,10 @@ module.exports = {
           {
             resolve: `gatsby-remark-images-contentful`,
             options: {
-              maxWidth: 650,
+              maxWidth: 500,
               backgroundColor: 'white',
               linkImagesToOriginal: false,
+              withWebp: true
             },
           },
         ],
@@ -94,7 +104,7 @@ module.exports = {
         setup(ref) {
           const ret = ref.query.site.siteMetadata.rssMetadata
           ret.allMarkdownRemark = ref.query.allMarkdownRemark
-          ret.generator = 'GatsbyJS GCN Starter'
+          ret.generator = 'Codegainz'
           return ret
         },
         query: `

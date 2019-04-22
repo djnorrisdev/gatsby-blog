@@ -71,6 +71,73 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
+  const loadGear = new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allContentfulPost(
+          sort: { fields: [publishDate], order: DESC }
+          limit: 10000
+        ) {
+          edges {
+            node {
+              slug
+              publishDate
+            }
+          }
+        }
+      }
+    `).then(result => {
+      const gearPosts = result.data.allContentfulPost.edges
+      const gearPostsPerFirstPage = config.postsPerHomePage
+      const gearPostsPerPage = config.postsPerPage
+      const gearNumPages = Math.ceil(
+        gearPosts.slice(gearPostsPerFirstPage).length / gearPostsPerPage
+      )
+
+      // Create gear home page
+      createPage({
+        path: `/gear/`,
+        component: path.resolve(`./src/templates/gear.js`),
+        context: {
+          limit: gearPostsPerFirstPage,
+          skip: 0,
+          numPages: gearNumPages + 1,
+          currentPage: 1,
+        },
+      })
+
+      // Create additional pagination on home page if needed
+      Array.from({ length: gearNumPages }).forEach((_, i) => {
+        createPage({
+          path: `/${i + 2}/`,
+          component: path.resolve(`./src/templates/index.js`),
+          context: {
+            limit: gearPostsPerPage,
+            skip: i * gearPostsPerPage + gearPostsPerFirstPage,
+            numPages: gearNumPages + 1,
+            currentPage: i + 2,
+          },
+        })
+      })
+
+      // Create each individual post
+      gearPosts.forEach((edge, i) => {
+        const prev = i === 0 ? null : gearPosts[i - 1].node
+        const next = i === gearPosts.length - 1 ? null : gearPosts[i + 1].node
+        createPage({
+          path: `${edge.node.slug}/`,
+          component: path.resolve(`./src/templates/post.js`),
+          context: {
+            slug: edge.node.slug,
+            prev,
+            next,
+          },
+        })
+      })
+      resolve()
+    })
+  })
+
   const loadTags = new Promise((resolve, reject) => {
     graphql(`
       {
@@ -138,5 +205,5 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.all([loadPosts, loadTags, loadPages])
+  return Promise.all([loadPosts, loadGear, loadTags, loadPages])
 }

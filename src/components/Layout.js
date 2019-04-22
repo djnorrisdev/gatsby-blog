@@ -5,7 +5,7 @@ import favicon from '../images/favicon.ico'
 import GlobalStyle from '../styles/global'
 import theme from '../styles/theme'
 import config from '../utils/siteConfig'
-import Menu from '../components/Menu'
+import NavMenu from '../components/Menu'
 import Footer from '../components/Footer'
 
 const Template = ({ children }) => {
@@ -21,7 +21,7 @@ const Template = ({ children }) => {
       <ThemeProvider theme={theme}>
         <>
           <div className="siteContent">
-            <Menu />
+            <NavMenu />
             {children}
           </div>
           <Footer />

@@ -7,10 +7,22 @@ import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
 import PageBody from '../components/PageBody'
 import SEO from '../components/SEO'
+import Img from "gatsby-image"
+import styled from 'styled-components/macro'
+
+const ImgWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  & div.gatsby-image-wrapper {
+    border-radius: 7px;
+  }
+`
 
 const PageTemplate = ({ data }) => {
   const { title, slug, body } = data.contentfulPage
   const postNode = data.contentfulPage
+  const imgData = data.allContentfulAsset.edges[0].node
 
   return (
     <Layout>
@@ -21,6 +33,9 @@ const PageTemplate = ({ data }) => {
 
       <Container>
         <PageTitle>{title}</PageTitle>
+        <ImgWrapper>
+          <Img fixed={imgData.fixed}/>
+        </ImgWrapper>
         <PageBody body={body} />
       </Container>
     </Layout>
@@ -44,6 +59,21 @@ export const query = graphql`
         }
       }
     }
+    allContentfulAsset (filter: {title: {eq: "me-2-min"}}) {
+    edges {
+      node {
+        title
+            fixed(width: 250) {
+            width
+            height
+            src
+            srcSet
+            srcWebp
+            srcSetWebp
+          }
+      }
+    }
+  }
   }
 `
 

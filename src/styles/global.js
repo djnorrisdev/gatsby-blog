@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
+    padding: 0 1.5em;
   }
   footer {
     width: 100%;

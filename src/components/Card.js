@@ -6,10 +6,13 @@ import Img from 'gatsby-image'
 const Post = styled.li`
   position: relative;
   border: 1px solid ${props => props.theme.colors.secondary};
-  border-radius: 2px;
+  border-radius: 6px;
   margin: 0 0 1em 0;
   width: 100%;
   transition: background 0.2s;
+  img {
+    border-radius: 6px 6px 0 0;
+  }
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     flex: ${props => (props.featured ? '0 0 100%' : '0 0 49%')};
     margin: 0 0 2vw 0;
