@@ -7,6 +7,7 @@ const Wrapper = styled.section`
   min-height: 300px;
   margin: 2em auto;
   width: 1000px;
+  max-width: 100%;
 `
 const BgImg = styled(Img)`
   position: absolute;

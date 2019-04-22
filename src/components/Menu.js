@@ -91,11 +91,11 @@ padding-right: 12px;
 }
 
 .bm-burger-button {
-position: fixed;
+position: absolute;
 width: 30px;
 height: 24px;
-right: 20px;
 top: 38px;
+
 }
 
 
