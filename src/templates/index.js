@@ -24,7 +24,6 @@ const RecentPosts = styled.h1`
 const Index = ({ data, pageContext }) => {
   
   const posts = data.allContentfulPost.edges
-  console.log(posts)
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1

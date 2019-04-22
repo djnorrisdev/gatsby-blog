@@ -29,7 +29,7 @@ const Gear = ({ data, pageContext }) => {
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
-
+  console.log(posts.length)
   return (
     <Layout>
       <SEO />
@@ -46,9 +46,11 @@ const Gear = ({ data, pageContext }) => {
             <FeaturedTitle>Featured Post</FeaturedTitle>
             <Card {...featuredPost} featured />
             <RecentPosts>Recent Posts</RecentPosts>
-            {posts.slice(1).map(({ node: post }) => (
+            {posts.length === 1 ? <span>More Coming Soon...</span> :
+            posts.slice(1).map(({ node: post }) => (
               <Card key={post.id} {...post} />
-            ))}
+            ))
+            }
           </CardList>
         ) : (
           <CardList>

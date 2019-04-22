@@ -7,6 +7,7 @@ import theme from '../styles/theme'
 import config from '../utils/siteConfig'
 import NavMenu from '../components/Menu'
 import Footer from '../components/Footer'
+import MainAdBanner from './MainAdBanner';
 
 const Template = ({ children }) => {
   return (
@@ -22,6 +23,7 @@ const Template = ({ children }) => {
         <>
           <div className="siteContent">
             <NavMenu />
+            <MainAdBanner />
             {children}
           </div>
           <Footer />

@@ -47,7 +47,6 @@ const Nav = styled.nav`
     &:first-child {
       position: relative;
       margin: 0;
-      // flex-basis: 100%;
     }
   }
 
